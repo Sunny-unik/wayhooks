@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import logo from "../../assets/logo/logo.svg";
 import { Link as NavLink } from "react-router-dom";
+import Plans from "../plans/Plans";
 
 export default function LandingNav(props) {
   const navItems = ['Plans', 'Login', 'Signup'];
@@ -29,7 +30,7 @@ export default function LandingNav(props) {
     <Box onClick={ handleDrawerToggle } sx={ { textAlign: 'center' } }>
       <Typography variant="h6" sx={ { my: 2, color: '#1D3557' } }>
         <NavLink key="root" to="/" style={ { textDecoration: "none" } }>
-          <img src={ logo } alt={ logo } height="50rem" width="50rem" />
+          <img src={ logo } alt={ logo } height="100rem" width="140rem" />
         </NavLink>
       </Typography>
       <Divider />
@@ -37,7 +38,7 @@ export default function LandingNav(props) {
         { navItems.map((item, index) => (
           <NavLink key={ item } to={ navLinks[index] } style={ { textDecoration: "none" } }>
             <ListItem disablePadding>
-              <ListItemButton sx={ { textAlign: 'center', color: '#1D3557', fontFamily: "roboto", fontSize: "1.2rem", fontWeight: 700 } }>
+              <ListItemButton sx={ { textAlign: 'center', color: '#1D3557', fontFamily: 'sans-serif', fontSize: "1.2rem", fontWeight: 500 } }>
                 <ListItemText primary={ item } />
               </ListItemButton>
             </ListItem>
@@ -46,7 +47,6 @@ export default function LandingNav(props) {
       </List>
     </Box>
   );
-
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
@@ -57,19 +57,47 @@ export default function LandingNav(props) {
             sx={ { mr: 2, display: { sm: 'none' } } } >
             <MenuIcon sx={ { color: "#1D3557" } } />
           </IconButton>
-          <Typography variant="h6" component="div" sx={ { flexGrow: 1, display: { xs: 'none', sm: 'block' } } }>
-            <NavLink key="root" to="/" style={ { color: "#1D3557", textDecoration: "none" } }>
-              <img src={ logo } className="logo" alt="wayhooks" height="50rem" width="64rem" />
+          <Typography variant="h7" component="div" sx={ { flexGrow: 1, display: { xs: 'none', sm: 'block' } } }>
+            <NavLink key="root" to="/" style={ {color: "#1D3557", textDecoration: "none" } }>
+              <img src={ logo } className="logo" alt="wayhooks"  height="85rem" width="110rem" sx={{marginTop:'10px'}} />
             </NavLink>
           </Typography>
           <Box sx={ { display: { xs: 'none', sm: 'block' } } }>
-            { navItems.map((item, index) => (
-              <NavLink className={ ({ isActive }) => isActive ? "active" : "" } to={ navLinks[index] } key={ item } style={ { textDecoration: "none" } }>
-                <Button sx={ { color: '#1D3557', fontFamily: "roboto", fontSize: "1.2rem", fontWeight: 700 } }>
-                  { item }
+              <NavLink className={ ({ isActive }) => isActive ? "active" : "" } to={'/plans' } key={ 'Plans' } style={ { textDecoration: "none" } }>
+                <Button sx={ { 
+                  color: '#1D3557', fontFamily: "sans-serif", fontSize: "1.2rem", fontWeight: 500,marginRight:'10px',
+                  '&:hover': {
+                   backgroundColor:'#ffff'
+                  },
+                }
+                 }>
+                  Plans
                 </Button>
-              </NavLink>
-            )) }
+                </NavLink>
+              <NavLink className={ ({ isActive }) => isActive ? "active" : "" } to={'/login' } key={ 'Login' } style={ { textDecoration: "none" } }>
+                <Button sx={ { 
+                 color:'#ffff', backgroundColor: '#1D3557', fontFamily: "sans-serif", fontSize: "1rem", fontWeight: 500,border:'2px solid black',borderRadius:'10px'
+                 ,'&:hover': {
+                  backgroundColor: '#457B9D',
+                  color:'#ffff'
+                },
+                }
+                 }>
+                  Login
+                </Button>
+                </NavLink>
+              <NavLink className={ ({ isActive }) => isActive ? "active" : "" } to={'/signup' } key={ 'SignUp' } style={ { textDecoration: "none" } }>
+                <Button sx={ { 
+                 color:'#ffff', backgroundColor: '#1D3557', fontFamily: "sans-serif", fontSize: "1rem", borderRadius:'10px',fontWeight: 500,border:'2px solid black',marginLeft:'2px' 
+                 ,'&:hover': {
+                  backgroundColor: '#457B9D',
+                  color:'#ffff'
+                },
+                }
+                 }>
+                  SignUp
+                </Button>
+                </NavLink>
           </Box>
         </Toolbar>
       </AppBar>
@@ -84,7 +112,10 @@ export default function LandingNav(props) {
           } }
         >
           { drawer }
+       
+       
         </Drawer>
+     
       </Box>
     </Box >
   );
