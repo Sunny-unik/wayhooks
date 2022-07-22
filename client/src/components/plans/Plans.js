@@ -7,6 +7,7 @@ export default function Plans() {
     <div>
       <LandingNav />
       <Toolbar />
+      <Toolbar />
       Plans
     </div>
   );
