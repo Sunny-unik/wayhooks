@@ -1,6 +1,7 @@
-import { Toolbar } from "@mui/material";
+import { Toolbar } from '@mui/material';
 import React from 'react';
-import LandingNav from "../landingNav/LandingNav";
+import Footer from '../footer/Footer';
+import LandingNav from '../landingNav/LandingNav';
 
 export default function Plans() {
   return (
@@ -9,6 +10,7 @@ export default function Plans() {
       <Toolbar />
       <Toolbar />
       Plans
+      <Footer />
     </div>
   );
 }

@@ -1,14 +1,14 @@
 import React from 'react';
-import LandingNav from "../../components/landingNav/LandingNav";
-import Showcase from "../../components/showcase/Showcase";
-import Plans from "../../components/plans/Plans";
+import Footer from '../../components/footer/Footer';
+import LandingNav from '../../components/landingNav/LandingNav';
+import Showcase from '../../components/showcase/Showcase';
 
 export default function LandingPage() {
   return (
     <div>
       <LandingNav />
       <Showcase />
-      <Plans />
+      <Footer />
     </div>
   );
 }
