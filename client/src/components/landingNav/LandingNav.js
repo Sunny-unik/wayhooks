@@ -12,10 +12,11 @@ import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { Link as NavLink } from 'react-router-dom';
+import { Link as NavLink, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo/logo.svg';
 
 export default function LandingNav(props) {
+  const location = useLocation();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -69,7 +70,7 @@ export default function LandingNav(props) {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar component='nav' sx={{ backgroundColor: '#fff' }}>
+      <AppBar component='nav' sx={{ backgroundColor: '#fff', paddingX: '1em' }}>
         <Toolbar>
           <IconButton
             color='inherit'
@@ -80,15 +81,21 @@ export default function LandingNav(props) {
           >
             <MenuIcon sx={{ color: '#1D3557' }} />
           </IconButton>
-          <Typography variant='h7' component='div' sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-            <NavLink to='/' style={{ color: '#1D3557', textDecoration: 'none' }}>
+          <Typography component='div' sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+            <NavLink
+              to='/'
+              style={{ color: '#1D3557', textDecoration: 'none' }}
+              onClick={() => {
+                location.pathname === '/' && document.body.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+            >
               <img
                 src={logo}
                 className='logo'
                 alt='wayhooks'
-                height='85rem'
-                width='110rem'
-                sx={{ marginTop: '10px' }}
+                height='64rem'
+                width='100rem'
+                style={{ marginTop: '.2em' }}
               />
             </NavLink>
           </Typography>
@@ -98,10 +105,11 @@ export default function LandingNav(props) {
                 sx={{
                   color: '#1D3557',
                   fontFamily: 'sans-serif',
-                  fontSize: '1.2rem',
-                  fontWeight: 500,
+                  fontSize: '1rem',
+                  fontWeight: 700,
+                  borderRadius: '10px',
                   marginRight: '10px',
-                  '&:hover': { backgroundColor: '#ffff' },
+                  '&:hover': { backgroundColor: '#457B9D', color: '#fff', fontWeight: 500 },
                 }}
               >
                 Login
@@ -115,7 +123,6 @@ export default function LandingNav(props) {
                   fontFamily: 'sans-serif',
                   fontSize: '1rem',
                   fontWeight: 500,
-                  border: '2px solid black',
                   borderRadius: '10px',
                   '&:hover': { backgroundColor: '#457B9D' },
                 }}
