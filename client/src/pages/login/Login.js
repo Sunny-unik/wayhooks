@@ -9,41 +9,23 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import logo from '../../assets/logo/logo.png';
 import backImg from '../../assets/images/loginBg.png';
-import { Link as NavLink, useNavigate } from 'react-router-dom';
-
-function Copyright(props) {
-  return (
-    <Typography variant='body2' color='text.secondary' align='center' {...props}>
-      {'Copyright © '}
-      <NavLink to='/' style={{ textDecoration: 'none', color: '#1D3557' }} sx={{ '&:hover': { color: '#457B9D' } }}>
-        wayhooks
-      </NavLink>{' '}
-      2022{'.'}
-    </Typography>
-  );
-}
-
-const theme = createTheme();
+import { useNavigate } from 'react-router-dom';
+import Copyright from '../../components/copyright/Copyright';
+import { InputAdornment } from '@mui/material';
+import VisibilityOffTwoTone from '@mui/icons-material/VisibilityOffTwoTone';
+import VisibilityTwoTone from '@mui/icons-material/VisibilityTwoTone';
 
 export default function Login() {
-  const [type, settype] = useState('');
   const navigate = useNavigate();
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-      domain: data.get('domain'),
-    });
-  };
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+  const [domain, setdomain] = useState('');
+  const [showHide, setshowHide] = useState('password');
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Grid container component='main' sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -74,15 +56,18 @@ export default function Login() {
             <Typography component='h2' variant='h6' sx={{ fontFamily: 'Roboto Helvetica Arial sans-serif Ubuntu' }}>
               Welcome, please sign in using your credentials
             </Typography>
-            <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 1, marginTop: '-10px' }}>
+            <Box component='form' noValidate sx={{ mt: 1, marginTop: '-10px' }}>
               <TextField
                 margin='normal'
                 required
                 fullWidth
-                id='email'
+                id='text'
                 label='Email or UserName'
+                type='text'
                 name='email'
                 autoFocus
+                value={email}
+                onChange={e => setemail(e.target.value)}
               />
               <TextField
                 margin='normal'
@@ -90,8 +75,23 @@ export default function Login() {
                 fullWidth
                 name='password'
                 label='Password'
-                type='password'
+                type={showHide}
                 id='password'
+                value={password}
+                onChange={e => setpassword(e.target.value)}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <Button
+                        onClick={() => {
+                          setshowHide(showHide === 'text' ? 'password' : 'text');
+                        }}
+                      >
+                        {showHide === 'text' ? <VisibilityOffTwoTone /> : <VisibilityTwoTone />}
+                      </Button>
+                    </InputAdornment>
+                  ),
+                }}
               />
               <TextField
                 margin='normal'
@@ -100,10 +100,9 @@ export default function Login() {
                 name='domain'
                 label='Domain'
                 id='domainName'
-                onChange={e => {
-                  settype(e.target.value);
-                  console.log(type);
-                }}
+                type='text'
+                value={domain}
+                onChange={e => setdomain(e.target.value)}
               />
               <FormControlLabel
                 control={<Checkbox value='remember' style={{ color: '#457B9D' }} />}
@@ -114,9 +113,7 @@ export default function Login() {
                 type='submit'
                 fullWidth
                 variant='contained'
-                onClick={() => {
-                  navigate('/' + type);
-                }}
+                onClick={() => navigate('/' + domain)}
                 sx={{
                   mt: 3,
                   mb: 2,
@@ -129,19 +126,20 @@ export default function Login() {
                   },
                 }}
               >
-                <Typography style={{ fontFamily: 'sans-serif ' }}>Sign In</Typography>
+                <Typography sx={{ fontFamily: 'Sans-serif' }}>Sign In</Typography>
               </Button>
               <Grid container>
                 <Grid item xs>
                   <Link
-                    href='#'
                     variant='body2'
+                    onClick={() => navigate('/forgotPassword')}
                     sx={{
                       color: '#1D3557',
                       float: 'right',
                       textDecoration: 'none',
-                      fontFamily: 'sans-serif',
-                      '&:hover': { color: '#457B9D' },
+                      fontFamily: 'Nunito',
+                      fontSize: '1em',
+                      '&:hover': { color: '#457B9D', cursor: 'pointer' },
                     }}
                   >
                     Forgot Password?
@@ -153,6 +151,6 @@ export default function Login() {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </>
   );
 }

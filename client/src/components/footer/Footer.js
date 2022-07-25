@@ -16,28 +16,30 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { Link as NavLink, useLocation } from 'react-router-dom';
 import MailTwoTone from '@mui/icons-material/MailTwoTone';
 import SendAndArchiveTwoTone from '@mui/icons-material/SendAndArchiveTwoTone';
 import FacebookTwoTone from '@mui/icons-material/FacebookTwoTone';
 import Instagram from '@mui/icons-material/Instagram';
 import Twitter from '@mui/icons-material/Twitter';
 import LinkedIn from '@mui/icons-material/LinkedIn';
+import Copyright from '../copyright/Copyright';
 
 export default function Footer() {
   const footerDetails = {
     resources: ['Team', 'Feedback', 'Contact us', 'Locations', 'Privacy policy', 'Terms of use'],
-    joinUs: [<FacebookTwoTone />, <Instagram />, <Twitter />, <LinkedIn />],
+    joinUs: [
+      <FacebookTwoTone sx={{ '&:hover': { color: '#E63946' } }} />,
+      <Instagram sx={{ '&:hover': { color: '#E63946' } }} />,
+      <Twitter sx={{ '&:hover': { color: '#E63946' } }} />,
+      <LinkedIn sx={{ '&:hover': { color: '#E63946' } }} />,
+    ],
   };
-  const location = useLocation();
   const [Email, setEmail] = useState('');
   const [open, setOpen] = useState(false);
   const [barMsg, setbarMsg] = useState('Subscribed Successfully');
   const [transition, setTransition] = useState(undefined);
 
-  function TransitionTop(props) {
-    return <Slide {...props} direction='top' />;
-  }
+  const TransitionTop = props => <Slide {...props} direction='down' />;
 
   const subClick = Transition => () => {
     setTransition(() => Transition);
@@ -65,23 +67,23 @@ export default function Footer() {
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
       <Container
-        maxWidth='xl'
+        maxWidth='lg'
         component='footer'
         sx={{
           borderTop: '1px solid #457B9D',
           mt: 8,
-          py: [3, 6],
+          py: [2, 4],
         }}
       >
         <Grid container spacing={4} justifyContent='space-evenly' sx={{ margin: 'auto' }}>
-          <Grid item xs={6} sm={3} key={'resources'}>
+          <Grid item xs={6} sm={3} key='resources'>
             <Typography variant='h6' color='text.primary' gutterBottom>
               Resources
             </Typography>
             <ul>
               {footerDetails.resources.map(item => (
                 <li key={item}>
-                  <Link href='#' variant='subtitle1' color='text.secondary'>
+                  <Link href='#' variant='subtitle1' color='text.secondary' sx={{ '&:hover': { color: '#457B9D' } }}>
                     {item}
                   </Link>
                 </li>
@@ -93,8 +95,8 @@ export default function Footer() {
               Join Us
             </Typography>
             <ul>
-              {footerDetails.joinUs.map(icons => (
-                <li key={icons}>
+              {footerDetails.joinUs.map((icons, index) => (
+                <li key={index}>
                   <Link href='#' variant='subtitle1' color='text.secondary' sx={{ '&:hover': { paddingLeft: '.2em' } }}>
                     {icons}
                   </Link>
@@ -117,7 +119,7 @@ export default function Footer() {
                 }}
                 startAdornment={
                   <InputAdornment position='start'>
-                    <MailTwoTone />
+                    <MailTwoTone sx={{ color: '#457B9D' }} />
                     &nbsp;
                   </InputAdornment>
                 }
@@ -143,19 +145,7 @@ export default function Footer() {
             </FormControl>
           </Grid>
         </Grid>
-        <Typography variant='body2' color='text.secondary' align='center' sx={{ mt: 5 }}>
-          {'Copyright © '}
-          <NavLink
-            to='/'
-            style={{ textDecoration: 'none', color: '#1D3557' }}
-            onClick={() => {
-              location.pathname === '/' && document.body.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }}
-          >
-            Wayhooks
-          </NavLink>
-          &nbsp;2022.
-        </Typography>
+        <Copyright sx={{ mt: 1 }} />
       </Container>
     </>
   );
