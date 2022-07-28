@@ -38,8 +38,8 @@ export default function Login() {
             backgroundImage: `url(${backImg})`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: t => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
-            backgroundSize: 'cover',
             backgroundPosition: 'center',
+            backgroundSize: 'contain',
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -52,11 +52,11 @@ export default function Login() {
               alignItems: 'center',
             }}
           >
-            <img src={logo} style={{ height: '100px', marginBottom: '20px' }} className='logo' alt='logo' />
-            <Typography component='h2' variant='h6' sx={{ fontFamily: 'Roboto Helvetica Arial sans-serif Ubuntu' }}>
+            <img src={logo} style={{ height: '100px', marginBottom: '20px',marginTop: '-50px' }} className='logo' alt='logo' />
+            <Typography component='h2' variant='h6'  sx={{marginTop:'-15px'}}>
               Welcome, please sign in using your credentials
             </Typography>
-            <Box component='form' noValidate sx={{ mt: 1, marginTop: '-10px' }}>
+            <Box component='form' noValidate sx={{ mt: 1 ,marginTop:'-5px'}}>
               <TextField
                 margin='normal'
                 required
@@ -137,7 +137,7 @@ export default function Login() {
                       color: '#1D3557',
                       float: 'right',
                       textDecoration: 'none',
-                      fontFamily: 'Nunito',
+                     
                       fontSize: '1em',
                       '&:hover': { color: '#457B9D', cursor: 'pointer' },
                     }}
