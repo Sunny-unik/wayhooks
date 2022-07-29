@@ -15,9 +15,9 @@ code {
   width: 1em;
 }
 ::-webkit-scrollbar-track{
-  background: #A8DADC;
+  background: whitesmoke;
 }
 ::-webkit-scrollbar-thumb{
-  background: #E63946;
+  background: #A8DADC;
   border-radius: .4em;
 }

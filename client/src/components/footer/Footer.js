@@ -67,9 +67,15 @@ export default function Footer() {
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
       <Container
-        maxWidth='lg'
+        maxWidth='md'
         component='footer'
         sx={{
+          '@media only screen and (max-width:399px)': {
+            width: '100vw',
+            marginX: 0,
+            paddingX: 0,
+            overflowX: 'hidden',
+          },
           borderTop: '1px solid #457B9D',
           mt: 8,
           py: [2, 4],
@@ -108,12 +114,18 @@ export default function Footer() {
             <Typography variant='h6' color='text.primary' gutterBottom>
               Subscribe to get updated
             </Typography>
-            <FormControl sx={{ m: 1, width: '90%' }}>
+            <FormControl sx={{ m: 1, width: '90%', px: 0 }}>
               <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
               <OutlinedInput
                 id='outlined-adornment-email'
                 value={Email}
                 label='Email'
+                sx={{
+                  marginX: 0,
+                  '@media only screen and (max-width:399px)': {
+                    width: '90%',
+                  },
+                }}
                 onChange={e => {
                   setEmail(e.target.value);
                 }}
