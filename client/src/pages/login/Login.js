@@ -52,11 +52,16 @@ export default function Login() {
               alignItems: 'center',
             }}
           >
-            <img src={logo} style={{ height: '100px', marginBottom: '20px',marginTop: '-50px' }} className='logo' alt='logo' />
-            <Typography component='h2' variant='h6'  sx={{marginTop:'-15px'}}>
+            <img
+              src={logo}
+              style={{ height: '100px', marginBottom: '20px', marginTop: '-50px' }}
+              className='logo'
+              alt='logo'
+            />
+            <Typography component='h2' variant='h6' sx={{ marginTop: '-15px' }}>
               Welcome, please sign in using your credentials
             </Typography>
-            <Box component='form' noValidate sx={{ mt: 1 ,marginTop:'-5px'}}>
+            <Box component='form' noValidate sx={{ mt: 1, marginTop: '-5px' }}>
               <TextField
                 margin='normal'
                 required
@@ -82,11 +87,7 @@ export default function Login() {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
-                      <Button
-                        onClick={() => {
-                          setshowHide(showHide === 'text' ? 'password' : 'text');
-                        }}
-                      >
+                      <Button onClick={() => setshowHide(showHide === 'text' ? 'password' : 'text')}>
                         {showHide === 'text' ? <VisibilityOffTwoTone /> : <VisibilityTwoTone />}
                       </Button>
                     </InputAdornment>
@@ -137,7 +138,6 @@ export default function Login() {
                       color: '#1D3557',
                       float: 'right',
                       textDecoration: 'none',
-                     
                       fontSize: '1em',
                       '&:hover': { color: '#457B9D', cursor: 'pointer' },
                     }}

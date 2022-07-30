@@ -14,8 +14,10 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { InputAdornment } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const navigate = useNavigate();
   const [name, setname] = useState('');
   const [email, setemail] = useState('');
   const [userName, setuserName] = useState('');
@@ -59,7 +61,7 @@ export default function Login() {
                 margin='normal'
                 required
                 fullWidth
-                id='text'
+                id='name'
                 label='Enter Name'
                 type='text'
                 name='name'
@@ -71,7 +73,7 @@ export default function Login() {
                 margin='normal'
                 required
                 fullWidth
-                id='text'
+                id='username'
                 label='Enter Username'
                 type='text'
                 name='username'
@@ -82,6 +84,8 @@ export default function Login() {
               <Box sx={{ marginTop: '1rem' }}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
+                    openTo='year'
+                    views={['year', 'month', 'day']}
                     inputFormat='dd/MM/yyyy'
                     label='Date Of Birth'
                     value={date}
@@ -115,11 +119,7 @@ export default function Login() {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
-                      <Button
-                        onClick={() => {
-                          setshowHide(showHide === 'text' ? 'password' : 'text');
-                        }}
-                      >
+                      <Button onClick={() => setshowHide(showHide === 'text' ? 'password' : 'text')}>
                         {showHide === 'text' ? <VisibilityOffTwoTone /> : <VisibilityTwoTone />}
                       </Button>
                     </InputAdornment>
@@ -128,7 +128,7 @@ export default function Login() {
               />
               <Button
                 className='submit'
-                type='submit'
+                type='button'
                 fullWidth
                 variant='contained'
                 sx={{
@@ -142,6 +142,7 @@ export default function Login() {
                     boxShadow: 'none',
                   },
                 }}
+                onClick={() => navigate('/plans')}
               >
                 <Typography sx={{ fontFamily: 'Sans-serif' }}>Submit</Typography>
               </Button>

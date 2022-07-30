@@ -6,17 +6,57 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Copyright from '../../components/copyright/Copyright';
 import React, { useState } from 'react';
-import { InputAdornment } from '@mui/material';
+import { IconButton, InputAdornment, Slide, Snackbar } from '@mui/material';
 import VisibilityTwoTone from '@mui/icons-material/VisibilityTwoTone';
 import VisibilityOffTwoTone from '@mui/icons-material/VisibilityOffTwoTone';
 import logo from '../../assets/logo/logo.svg';
+import { useNavigate } from 'react-router-dom';
+import validOtpPassword from '../../validations/ValidOtpPassword';
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const [otp, setotp] = useState('');
   const [password, setpassword] = useState('');
   const [confirmPassword, setconfirmPassword] = useState('');
   const [showHide, setshowHide] = useState('password');
   const [anotherShow, setanotherShow] = useState('password');
+  const [open, setOpen] = useState(false);
+  const [barMsg, setbarMsg] = useState('');
+  const [transition, setTransition] = useState(undefined);
+  const [colors, setcolors] = useState({ color: '#F1FAEE', backgroundColor: '#23ce7b' });
+
+  const TransitionTop = props => <Slide {...props} direction='down' />;
+
+  const subClick = Transition => () => {
+    const validObj = validOtpPassword(otp, password, confirmPassword);
+    if (!validObj.valid) {
+      setbarMsg(validObj.msg);
+      setcolors({ color: '#F1FAEE', backgroundColor: '#E63946' });
+      setTransition(() => Transition);
+      setOpen(true);
+    } else {
+      setbarMsg(validObj.msg);
+      setcolors({ color: '#F1FAEE', backgroundColor: '#23ce7b' });
+      setTransition(() => Transition);
+      setOpen(true);
+      setTimeout(() => navigate('/'), 250);
+    }
+  };
+
+  const barClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const Alertbar = (
+    <React.Fragment>
+      <IconButton size='small' aria-label='close' color='inherit' onClick={barClose}>
+        X
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -62,11 +102,7 @@ export default function SignIn() {
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
-                  <Button
-                    onClick={() => {
-                      setshowHide(showHide === 'text' ? 'password' : 'text');
-                    }}
-                  >
+                  <Button onClick={() => setshowHide(showHide === 'text' ? 'password' : 'text')}>
                     {showHide === 'text' ? <VisibilityOffTwoTone /> : <VisibilityTwoTone />}
                   </Button>
                 </InputAdornment>
@@ -87,19 +123,31 @@ export default function SignIn() {
             InputProps={{
               endAdornment: (
                 <InputAdornment position='end'>
-                  <Button
-                    onClick={() => {
-                      setanotherShow(anotherShow === 'text' ? 'password' : 'text');
-                    }}
-                  >
+                  <Button onClick={() => setanotherShow(anotherShow === 'text' ? 'password' : 'text')}>
                     {anotherShow === 'text' ? <VisibilityOffTwoTone /> : <VisibilityTwoTone />}
                   </Button>
                 </InputAdornment>
               ),
             }}
           />
-          <Button type='button' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
+          <Button type='button' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }} onClick={subClick(TransitionTop)}>
             Update Password
+          </Button>
+          <Snackbar
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            open={open}
+            autoHideDuration={5000}
+            onClose={barClose}
+            TransitionComponent={transition}
+            message={barMsg}
+            action={Alertbar}
+            key={transition}
+            sx={{
+              '& .MuiSnackbarContent-root': colors,
+            }}
+          />
+          <Button type='button' fullWidth variant='outlined' sx={{ mb: 2 }} onClick={() => navigate('/login')}>
+            Go Back
           </Button>
         </Box>
       </Box>

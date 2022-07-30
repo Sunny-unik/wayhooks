@@ -34,6 +34,7 @@ export default function Footer() {
       <LinkedIn sx={{ '&:hover': { color: '#E63946' } }} />,
     ],
   };
+
   const [Email, setEmail] = useState('');
   const [open, setOpen] = useState(false);
   const [barMsg, setbarMsg] = useState('Subscribed Successfully');
@@ -54,7 +55,7 @@ export default function Footer() {
     setOpen(false);
   };
 
-  const snackbar = (
+  const Alertbar = (
     <React.Fragment>
       <IconButton size='small' aria-label='close' color='inherit' onClick={barClose}>
         X
@@ -122,13 +123,9 @@ export default function Footer() {
                 label='Email'
                 sx={{
                   marginX: 0,
-                  '@media only screen and (max-width:399px)': {
-                    width: '90%',
-                  },
+                  '@media only screen and (max-width:399px)': { width: '90%' },
                 }}
-                onChange={e => {
-                  setEmail(e.target.value);
-                }}
+                onChange={e => setEmail(e.target.value)}
                 startAdornment={
                   <InputAdornment position='start'>
                     <MailTwoTone sx={{ color: '#457B9D' }} />
@@ -150,8 +147,11 @@ export default function Footer() {
                 onClose={barClose}
                 TransitionComponent={transition}
                 message={barMsg}
-                action={snackbar}
+                action={Alertbar}
                 key={transition}
+                sx={{
+                  '& .MuiSnackbarContent-root': { color: '#F1FAEE', backgroundColor: '#23ce7b' },
+                }}
               />
               <FormHelperText id='my-helper-text'>We'll never share your email.</FormHelperText>
             </FormControl>
