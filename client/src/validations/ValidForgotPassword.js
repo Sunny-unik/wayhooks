@@ -1,4 +1,4 @@
-export default function validOtpPassword(otp, password, confirmPassword) {
+export default function validForgotPassword(otp, password, confirmPassword) {
   const strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
 
   if (otp.length !== 6) {

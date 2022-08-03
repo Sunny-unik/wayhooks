@@ -15,12 +15,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { InputAdornment } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import validSignup from '../../validations/ValidSignup';
 
 export default function Login() {
   const navigate = useNavigate();
   const [name, setname] = useState('');
+  const [username, setusername] = useState('');
   const [email, setemail] = useState('');
-  const [userName, setuserName] = useState('');
   const [date, setdate] = useState(null);
   const [password, setpassword] = useState('');
   const [showHide, setshowHide] = useState('password');
@@ -77,8 +78,8 @@ export default function Login() {
                 label='Enter Username'
                 type='text'
                 name='username'
-                value={userName}
-                onChange={e => setuserName(e.target.value)}
+                value={username}
+                onChange={e => setusername(e.target.value)}
                 autoFocus
               />
               <Box sx={{ marginTop: '1rem' }}>
@@ -142,7 +143,10 @@ export default function Login() {
                     boxShadow: 'none',
                   },
                 }}
-                onClick={() => navigate('/plans')}
+                onClick={() => {
+                  const validationObj = validSignup(name, username, date, email, password);
+                  validationObj.valid ? navigate('/plans') : alert(validationObj.msg);
+                }}
               >
                 <Typography sx={{ fontFamily: 'Sans-serif' }}>Submit</Typography>
               </Button>

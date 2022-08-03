@@ -11,7 +11,7 @@ import VisibilityTwoTone from '@mui/icons-material/VisibilityTwoTone';
 import VisibilityOffTwoTone from '@mui/icons-material/VisibilityOffTwoTone';
 import logo from '../../assets/logo/logo.svg';
 import { useNavigate } from 'react-router-dom';
-import validOtpPassword from '../../validations/ValidOtpPassword';
+import validForgotPassword from '../../validations/ValidForgotPassword';
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function SignIn() {
   const TransitionTop = props => <Slide {...props} direction='down' />;
 
   const subClick = Transition => () => {
-    const validObj = validOtpPassword(otp, password, confirmPassword);
+    const validObj = validForgotPassword(otp, password, confirmPassword);
     if (!validObj.valid) {
       setbarMsg(validObj.msg);
       setcolors({ color: '#F1FAEE', backgroundColor: '#E63946' });
