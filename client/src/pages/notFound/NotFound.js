@@ -1,7 +1,7 @@
 import { Toolbar } from '@mui/material';
 import React from 'react';
 import { Link as NavLink } from 'react-router-dom';
-import LandingNav from '../../components/landingNav/LandingNav';
+import LandingNav from 'components/landingNav/LandingNav';
 import './notFound.css';
 
 export default function NotFound() {

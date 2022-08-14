@@ -13,7 +13,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import { Link as NavLink, useLocation } from 'react-router-dom';
-import logo from '../../assets/logo/logo.svg';
+import logo from 'assets/logo/logo.svg';
 
 export default function LandingNav(props) {
   const location = useLocation();

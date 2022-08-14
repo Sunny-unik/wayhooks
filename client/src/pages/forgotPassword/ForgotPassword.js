@@ -4,14 +4,14 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Copyright from '../../components/copyright/Copyright';
+import Copyright from 'components/copyright/Copyright';
 import React, { useState } from 'react';
 import { IconButton, InputAdornment, Slide, Snackbar } from '@mui/material';
 import VisibilityTwoTone from '@mui/icons-material/VisibilityTwoTone';
 import VisibilityOffTwoTone from '@mui/icons-material/VisibilityOffTwoTone';
-import logo from '../../assets/logo/logo.svg';
+import logo from 'assets/logo/logo.svg';
 import { useNavigate } from 'react-router-dom';
-import validForgotPassword from '../../validations/ValidForgotPassword';
+import validForgotPassword from 'validations/ValidForgotPassword';
 
 export default function SignIn() {
   const navigate = useNavigate();

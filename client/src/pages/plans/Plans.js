@@ -1,9 +1,9 @@
 import React from 'react';
-import PriceCard from '../../components/priceCard/PriceCard';
+import PriceCard from 'components/priceCard/PriceCard';
 import { Toolbar } from '@mui/material';
-import LandingNav from '../../components/landingNav/LandingNav';
+import LandingNav from 'components/landingNav/LandingNav';
 import Grid from '@mui/material/Grid';
-import Footer from '../../components/footer/Footer';
+import Footer from 'components/footer/Footer';
 
 function Plans() {
   const plans = [
